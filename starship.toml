@@ -1,0 +1,23 @@
+format = """
+$hostname\
+$docker_context\
+$directory\
+$git_branch\
+$git_commit\
+$git_status\
+$line_break\
+$character\
+"""
+[hostname]
+ssh_symbol = " "
+
+[docker_context]
+symbol = " "
+
+[directory]
+read_only = " 󰌾"
+truncation_length = 3
+truncation_symbol = "..."
+
+[git_branch]
+symbol = " "
