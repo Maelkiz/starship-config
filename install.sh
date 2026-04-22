@@ -1,15 +1,20 @@
 #!/usr/bin/env sh
 set -eu
 
-DEST="$HOME/.config/starship/starship.toml"
+DEST="${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml"
 SRC="https://raw.githubusercontent.com/Maelkiz/starship-config/main/starship.toml"
 
 echo "Installing Starship config..."
 
-# Create directory if it doesn't exist
 mkdir -p "$(dirname "$DEST")"
 
-# Download and overwrite config
+# Backup if an existing starship config file exists
+if [ -f "$DEST" ]; then
+    cp "$DEST" "$DEST.bak"
+    echo "Existing config backed up to $DEST.bak"
+fi
+
+# Install the new config
 if command -v curl >/dev/null 2>&1; then
     curl -fsSL "$SRC" -o "$DEST"
 elif command -v wget >/dev/null 2>&1; then
